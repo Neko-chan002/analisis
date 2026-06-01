@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Wisatawan Nusantara Jawa Barat - Eksklusif & Elegan</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display (Elegan) & Inter (Modern) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons Premium Look -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            light: '#f5e0b3',
+                            DEFAULT: '#d4af37', // Metallic Gold
+                            dark: '#aa7c11',
+                        },
+                        luxuryDark: {
+                            light: '#0a3d31', // Royal dark emerald
+                            DEFAULT: '#02241c', // Deep emerald black
+                            dark: '#01140f', // Deepest emerald black
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #01140f; /* Deepest Emerald Black */
+            background-image: radial-gradient(circle at 50% 40%, #043529 0%, #01140f 100%);
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Ambient Luxurious Glowing Orbs (Soft Mint & Emerald Glow) */
+        .gold-glow-left {
+            position: fixed;
+            top: -15%;
+            left: -15%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, rgba(16, 185, 129, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+            animation: pulse-slow 8s ease-in-out infinite;
+        }
+        .gold-glow-right {
+            position: fixed;
+            bottom: -15%;
+            right: -15%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, rgba(20, 184, 166, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+            animation: pulse-slow 12s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Premium Minimalist Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #01140f; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #053b2e; 
+            border-radius: 4px;
+            border: 2px solid #01140f;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37; 
+        }
+
+        /* Elegant Fullscreen Loader */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #01140f;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05);
+        }
+
+        /* Golden Minimalist Geometric Loader */
+        .elegant-spinner {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .elegant-spinner::before, .elegant-spinner::after {
+            content: '';
+            position: absolute;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+        .elegant-spinner::before {
+            border-top-color: #d4af37;
+            border-bottom-color: #d4af37;
+            width: 100%;
+            height: 100%;
+            animation: spin 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+        .elegant-spinner::after {
+            border-left-color: #ffffff;
+            border-right-color: #ffffff;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            opacity: 0.5;
+            animation: spin-reverse 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        @keyframes spin-reverse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        /* Premium Sparkles/Bokeh Effect */
+        .sparkle {
+            position: fixed;
+            background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, rgba(212,175,55,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: floatUp linear infinite;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) translateX(0) scale(0.2); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) translateX(50px) scale(1); opacity: 0; }
+        }
+
+        /* High-End Glassmorphism */
+        .luxury-card {
+            background: rgba(2, 20, 15, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .luxury-card:hover {
+            border-color: rgba(212, 175, 55, 0.35);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.05);
+        }
+
+        /* High-End Dashboard Frame (White Card with a beautiful thick purple/violet glowing shadow) */
+        .dashboard-frame {
+            background-color: #ffffff; /* White background to match Looker Studio */
+            box-shadow: 0 15px 45px -10px rgba(0, 0, 0, 0.45), 0 0 35px rgba(46, 21, 114, 0.65); /* Rich thick purple glow shadow */
+            border-radius: 20px;
+            overflow: hidden; /* Clips iframe corners perfectly */
+            border: 1px solid rgba(46, 21, 114, 0.15); /* Soft purple border outline */
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .dashboard-frame:hover {
+            box-shadow: 0 25px 65px -5px rgba(0, 0, 0, 0.5), 0 0 55px rgba(46, 21, 114, 0.95); /* Even stronger glowing shadow on hover */
+            transform: translateY(-4px);
+        }
+
+        /* Interactive Buttons */
+        .btn-luxury {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: all 0.6s ease;
+        }
+        .btn-luxury:hover::before {
+            left: 100%;
+        }
+        .btn-luxury:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        /* Single Page Application Nav Transitions */
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+            opacity: 1;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Responsive Iframe Container mapping for 600x750 (4:5 Aspect Ratio) */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 125%; /* 750/600 = 125% to perfectly preserve aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="text-slate-200 antialiased relative min-h-screen flex flex-col">
+
+    <!-- Background Particle Container -->
+    <div id="particles-container"></div>
+    
+    <!-- Background Golden Ambient Glows -->
+    <div class="gold-glow-left"></div>
+    <div class="gold-glow-right"></div>
+
+    <!-- Elegant Loading Screen -->
+    <div id="loader-wrapper">
+        <div class="elegant-spinner"></div>
+        <h2 class="mt-8 text-xl font-serif tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-gold-light via-gold to-gold-dark font-bold uppercase animate-pulse-slow">Wisnu Jabar</h2>
+        <div class="w-24 h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent mt-4"></div>
+        <p class="text-slate-400 mt-3 text-xs tracking-wider uppercase font-light">Menyelaraskan Integritas Data BPS Jawa Barat</p>
+    </div>
+
+    <!-- Navbar Premium -->
+    <nav class="sticky top-0 z-50 luxury-card mx-4 mt-6 px-8 py-5 flex justify-between items-center animate-slide-up" style="animation-delay: 0.1s;">
+        <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-full border border-gold/30 overflow-hidden bg-luxuryDark-dark/80 shadow-inner flex items-center justify-center">
+                <img src="logo.png" alt="Neko-chan Logo" class="w-full h-full object-cover">
+            </div>
+            <div>
+                <h1 class="text-lg font-serif font-bold tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-gold-light via-gold to-gold uppercase">
+                    Wisnu Jabar
+                </h1>
+                <p class="text-[9px] text-slate-400 tracking-wider uppercase font-light">Portal Analisis Wisatawan</p>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="navigate('profile')" id="nav-profile" class="btn-luxury px-5 py-2.5 rounded-full text-xs tracking-widest font-semibold uppercase bg-gold text-luxuryDark-dark border-gold">
+                <i class="fa-solid fa-compass mr-2"></i>Ekspedisi
+            </button>
+            <button onclick="navigate('dashboard')" id="nav-dashboard" class="btn-luxury px-5 py-2.5 rounded-full text-xs tracking-widest font-semibold uppercase bg-transparent text-gold hover:bg-gold hover:text-luxuryDark-dark">
+                <i class="fa-solid fa-chart-pie mr-2"></i>Dashboard
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-10 max-w-6xl">
+        
+        <!-- ================= HALAMAN PROFIL (EKSKEDISI DATA) ================= -->
+        <section id="page-profile" class="page-content active">
+            <div class="luxury-card p-8 md:p-14 mb-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl -z-10"></div>
+                
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Elegant Profile Avatar Container -->
+                    <div class="relative group">
+                        <div class="absolute -inset-1.5 bg-gradient-to-r from-gold to-teal-500 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000"></div>
+                        <div class="relative w-44 h-44 rounded-full bg-luxuryDark-dark border-2 border-gold/50 overflow-hidden shadow-2xl flex items-center justify-center">
+                            <img src="logo.png" alt="Neko-chan Logo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-2 right-4 bg-gold text-luxuryDark-dark w-8 h-8 rounded-full shadow-lg border border-white flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-signature"></i>
+                        </div>
+                    </div>
+ 
+                    <!-- Profile Info -->
+                    <div class="text-center lg:text-left flex-1">
+                        <span class="inline-block px-4 py-1 border border-gold/40 text-gold rounded-full text-[10px] font-semibold tracking-widest uppercase mb-4 bg-gold/5 bg-gradient-to-r from-gold-light/10 to-gold/10">
+                            Karya & Analisis oleh Neko-chan
+                        </span>
+                        <h2 class="text-3xl md:text-5xl font-serif font-semibold text-white tracking-wide mb-4 leading-tight">
+                            Selamat Datang di <br><span class="bg-clip-text text-transparent bg-gradient-to-r from-gold-light via-gold to-gold-dark italic font-normal font-bold">Eksplorasi Keindahan</span> Jawa Barat
+                        </h2>
+                        <p class="text-slate-300 mb-8 text-base font-light leading-relaxed max-w-2xl">
+                            Halo! Saya <strong>Neko-chan</strong>. Selamat datang dalam ruang analisis data terpadu pergerakan Wisatawan Nusantara (Wisnu) di Provinsi Jawa Barat. Melalui representasi data visual yang mutakhir, kami mendedikasikan platform ini guna menyajikan wawasan bernilai tinggi, akurat, dan komprehensif bagi kemajuan pariwisata daerah.
+                        </p>
+                        
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                            <button onclick="navigate('dashboard')" class="btn-luxury px-8 py-4 bg-gold text-luxuryDark-dark rounded-full text-xs font-bold tracking-widest uppercase">
+                                Masuk ke Ruang Dashboard <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- Elegant Source Attribution & Partners Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Official Partner BPS Jabar -->
+                <div class="luxury-card p-8 border-l-4 border-gold">
+                    <div class="flex items-start gap-5">
+                        <div class="p-4 bg-gold/10 text-gold rounded-xl border border-gold/20">
+                            <i class="fa-solid fa-building-columns text-2xl"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="text-lg font-serif font-semibold text-white tracking-wide mb-2">Otoritas Kemitraan Data</h3>
+                            <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                                Seluruh arsitektur visualisasi bersumber langsung dari catatan statistik komparatif primer yang diverifikasi oleh lembaga negara terkait.
+                            </p>
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold bg-luxuryDark-dark/80 border border-gold/30 text-gold">
+                                <i class="fa-solid fa-shield-halved"></i> Badan Pusat Statistik Provinsi Jawa Barat
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analytical Method Info -->
+                <div class="luxury-card p-8 border-l-4 border-gold/50">
+                    <div class="flex items-start gap-5">
+                        <div class="p-4 bg-gold/10 text-gold rounded-xl border border-gold/20">
+                            <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-serif font-semibold text-white tracking-wide mb-2">Metodologi Interaktif</h3>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                Laporan dinamis pada halaman dashboard menggunakan teknologi Google Looker Studio untuk melacak, memfilter, dan menyajikan fluktuasi pergerakan wisatawan domestik di berbagai destinasi unggulan Jawa Barat secara instan dan akurat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN DASHBOARD ================= -->
+        <section id="page-dashboard" class="page-content">
+            <div class="text-center mb-8">
+                <span class="text-xs bg-clip-text text-transparent bg-gradient-to-r from-gold-light to-gold font-semibold tracking-[0.25em] uppercase">Visualisasi Interaktif</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white tracking-wide mt-2 mb-3">
+                    Analisis Wisatawan Nusantara <br><span class="bg-clip-text text-transparent bg-gradient-to-r from-gold-light via-gold to-gold-dark">Jawa Barat</span>
+                </h2>
+                <div class="flex justify-center">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium bg-luxuryDark-dark/80 border border-gold/30 text-gold shadow-md">
+                        <i class="fa-solid fa-circle-check"></i> Sumber Data: Badan Pusat Statistik (BPS) Jawa Barat
+                    </span>
+                </div>
+            </div>
+ 
+            <!-- Premium Looker Studio Iframe Container -->
+            <div class="dashboard-frame mx-auto w-full max-w-3xl relative">
+                
+                <!-- Elegant Loader for Iframe -->
+                <div id="iframe-loader" class="absolute inset-0 bg-white flex flex-col items-center justify-center z-10">
+                    <i class="fa-solid fa-circle-notch fa-spin text-3xl text-indigo-900 mb-3"></i>
+                    <span class="text-xs tracking-widest text-slate-500 uppercase font-light">Menghubungkan Server Looker Studio...</span>
+                </div>
+ 
+                <!-- Full Scale Responsive Embedded Dashboard -->
+                <div class="iframe-container relative z-0 bg-white">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="https://datastudio.google.com/embed/reporting/7fdfd5ce-ea1e-4ea1-b941-48790bfb4f4f/page/1qtzF" 
+                        frameborder="0" 
+                        style="border:0" 
+                        allowfullscreen 
+                        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                        onload="document.getElementById('iframe-loader').style.display='none';"
+                    ></iframe>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                 <button onclick="navigate('profile')" class="btn-luxury px-6 py-3 rounded-full text-xs font-semibold tracking-wider uppercase bg-transparent text-slate-400 border-slate-700 hover:text-white">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>Kembali Ke Navigasi Ekspedisi
+                 </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Premium Footer -->
+    <footer class="mt-auto py-8 text-center border-t border-gold/10 bg-luxuryDark-dark/40 animate-fade-in" style="animation-delay: 0.8s;">
+        <p class="text-xs tracking-widest text-slate-500 uppercase">
+            Karya Neko-chan &bull; Disusun Dengan Komitmen Integritas Data Tertinggi &copy; 2026
+        </p>
+        <p class="mt-2 text-[10px] text-gold/60 tracking-wider">
+            Neko-chan &bull; Hak Cipta Dilindungi Undang-Undang
+        </p>
+    </footer>
+
+    <script>
+        // 1. Loading Screen Graceful Fade Out
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader-wrapper');
+                loader.classList.add('loader-hidden');
+                
+                // Completely clean up from rendering hierarchy
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 800);
+            }, 1800); // 1.8 seconds premium stay
+            
+            // Generate background luxury dust sparkles
+            initSparkles();
+        });
+
+        // 2. Single Page Navigation with Smooth Animations
+        function navigate(pageId) {
+            const sections = document.querySelectorAll('.page-content');
+            
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+                sec.style.animation = 'none'; 
+                sec.offsetHeight; /* trigger reflow */
+                sec.style.animation = null; 
+            });
+
+            const targetSection = document.getElementById(`page-${pageId}`);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Sync Nav Buttons Design
+            const btnProfile = document.getElementById('nav-profile');
+            const btnDashboard = document.getElementById('nav-dashboard');
+
+            if (pageId === 'profile') {
+                btnProfile.className = "btn-luxury px-5 py-2.5 rounded-full text-xs tracking-widest font-semibold uppercase bg-gold text-luxuryDark-dark border-gold";
+                btnDashboard.className = "btn-luxury px-5 py-2.5 rounded-full text-xs tracking-widest font-semibold uppercase bg-transparent text-gold hover:bg-gold hover:text-luxuryDark-dark";
+            } else if (pageId === 'dashboard') {
+                btnDashboard.className = "btn-luxury px-5 py-2.5 rounded-full text-xs tracking-widest font-semibold uppercase bg-gold text-luxuryDark-dark border-gold";
+                btnProfile.className = "btn-luxury px-5 py-2.5 rounded-full text-xs tracking-widest font-semibold uppercase bg-transparent text-gold hover:bg-gold hover:text-luxuryDark-dark";
+            }
+            
+            // Seamless scrolling up to maintain layout focal points
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 3. Luxurious Floating Bokeh/Gold Dust Engine
+        function initSparkles() {
+            const container = document.getElementById('particles-container');
+            const totalParticles = 20;
+            
+            for (let i = 0; i < totalParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('sparkle');
+                
+                const leftPosition = Math.random() * 100;
+                particle.style.left = `${leftPosition}vw`;
+                
+                const animDuration = Math.random() * 20 + 15; // 15 to 35 seconds
+                particle.style.animationDuration = `${animDuration}s`;
+                
+                const delay = Math.random() * 15;
+                particle.style.animationDelay = `-${delay}s`;
+                
+                const size = Math.random() * 12 + 4; // 4px to 16px soft circles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                container.appendChild(particle);
+            }
+        }
+    </script>
+</body>
+</html>
